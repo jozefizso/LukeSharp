@@ -5,6 +5,7 @@
 
 ## License
 
-Originally created by Pasha Bizhan.
+Originally created by Pasha Bizhan and  Andrzej Bialecki.
+Updated by jinzhao.
 
-Copyright (c) 2011 Pasha Bizhan under [Microsoft Public License](LICENSE)
+[Apache License 2.0](LICENSE)
