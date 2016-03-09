@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.ComponentModel;
 using System.Xml.Serialization;
-using System.Collections.Generic;
+using System.Collections;
 
 namespace Lucene.Net.LukeNet
 {
@@ -20,7 +20,7 @@ namespace Lucene.Net.LukeNet
 			get { return pd.LastPwd;}
 			set { pd.LastPwd = value;}
 		}
-		public List<string> MruList
+		public ArrayList MruList
 		{
 			get { return pd.MruList;}
 			set { pd.MruList = value;}
@@ -43,7 +43,7 @@ namespace Lucene.Net.LukeNet
 		{
 			pd = new PrefsData();
 			UseCompound = false;
-			MruList = new List<string>();
+			MruList = new ArrayList();
 			MruMaxSize = 10;
 		}
 
@@ -71,7 +71,7 @@ namespace Lucene.Net.LukeNet
 
 				pd = (PrefsData)serializer.Deserialize(new StreamReader(filename));
 				if (MruList == null)
-					MruList = new List<string>();
+					MruList = new ArrayList();
 				if (MruList.Count > MruMaxSize)
 					MruList.RemoveRange(MruMaxSize, MruList.Count - MruMaxSize);
 			} 
@@ -96,10 +96,8 @@ namespace Lucene.Net.LukeNet
 
 		public class PrefsData
 		{
-            [DefaultValueAttribute(1)]
-            public int Version;
-            public string LastPwd;
-			public List<string> MruList;
+			public string LastPwd;
+			public ArrayList MruList;
 			[DefaultValueAttribute(10)]
 			public int MruMaxSize;
 			[DefaultValueAttribute(true)]

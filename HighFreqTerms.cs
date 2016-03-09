@@ -37,7 +37,7 @@ namespace Lucene.Net.LukeNet
 		{
 			if (dir == null || fields == null) return new TermInfo[0];
         
-			IndexReader reader = IndexReader.Open(dir, true);
+			IndexReader reader = IndexReader.Open(dir);
 			TermInfoQueue tiq = new TermInfoQueue(numTerms);
 			TermEnum terms = reader.Terms();
         
@@ -67,11 +67,11 @@ namespace Lucene.Net.LukeNet
 				
 				if (terms.DocFreq() > minFreq) 
 				{
-                    TermInfo top = (TermInfo)tiq.Add(new TermInfo(terms.Term(), terms.DocFreq()));
+					tiq.Put(new TermInfo(terms.Term(), terms.DocFreq()));
 					if (tiq.Size() >= numTerms) 		     // if tiq overfull
 					{
 						tiq.Pop();				     // remove lowest in tiq
-						minFreq = top.DocFreq; // reset minFreq
+						minFreq = ((TermInfo)tiq.Top()).DocFreq; // reset minFreq
 					}
 				}
 			}
